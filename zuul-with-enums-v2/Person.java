@@ -6,7 +6,7 @@ public class Person
 
     public Person(){
         inventario = new Inventario();
-        movimentos =  50;
+        movimentos =  100;
     }
 
     public Inventario getInventario(){
@@ -21,4 +21,11 @@ public class Person
         this.movimentos = movimentos;
     }
 
+    public boolean addItem(Item item){
+        return inventario.addItem(item);
+    }
+    
+    public void removeItem(Item item) {
+    	inventario.removeItem(item);
+    }
 }
