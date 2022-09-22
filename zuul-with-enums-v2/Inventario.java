@@ -10,6 +10,12 @@ public class Inventario {
         pesoAtual = 0;
         pesoTotal = 20;
     }
+    
+    public Inventario(ArrayList<Item> is) {
+        itens = new ArrayList<Item>();
+        pesoAtual = 0;
+        pesoTotal = 999999999;
+    }
 
     public ArrayList<Item> getItens(){
         return itens;
@@ -62,4 +68,3 @@ public class Inventario {
         itens.remove(i);
     }
 }
-
