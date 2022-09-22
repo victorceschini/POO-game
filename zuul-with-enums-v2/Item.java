@@ -4,6 +4,7 @@ public class Item
     private String descricao;
     private float peso;
 
+		
     public Item(String n, String d, float p)
     {
         nome = n;
