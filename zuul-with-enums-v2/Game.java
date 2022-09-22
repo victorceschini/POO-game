@@ -18,6 +18,7 @@
 public class Game 
 {
     private Parser parser;
+    private Person player;
     private Room currentRoom;
         
     /**
@@ -118,6 +119,19 @@ public class Game
             case QUIT:
                 wantToQuit = quit(command);
                 break;
+              
+            case LOOK:
+                exibeQuarto(currentRoom);
+                break;
+                
+            case PICK:
+                pegaItem(command);
+                break;
+                
+            case DROP:
+            	dropaItem(command);
+            	break;
+         
         }
         return wantToQuit;
     }
@@ -179,4 +193,51 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+  
+    public void exibeItem(Item item) {
+		System.out.println("****" + item.getNome() + "****");
+		System.out.println(item.getDescricao()); 
+		System.out.println("Peso: "+item.getPeso()); 	
+	}
+	
+	public void exibeItens(Inventario inventario) {
+		for (Item i:inventario.getItens()) {
+			System.out.println("\n-----------------------------");
+			exibeItem(i);
+			System.out.println("-----------------------------\n");
+		}	
+	}
+	
+	public void exibeQuarto(Room sala) {
+		System.out.println(sala.getLongDescription()); 
+		System.out.println("O que há nesta sala:"); 	
+		exibeItens(sala.getInventario());
+	}
+	
+	private void pegaItem(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Que item?");
+            return;
+        }
+
+        Inventario inventarioSala = currentRoom.getInventario();
+
+        Item item = inventarioSala.getItem(command.getSecondWord());
+        
+        if (player.addItem(item)) {
+        	currentRoom.removeItem(item);
+        }
+        else {
+        	System.out.println("Item muito pesado, tente esvaziar o seu inventario...");
+        }
+        
+    }
+	
+	private void dropaItem(Command command)
+    {
+
+    }
+	
 }
